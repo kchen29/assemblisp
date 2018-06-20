@@ -7,7 +7,7 @@ all: $(output).s
 	ld $(output).o
 	./a.out
 
-$(output).s:
+$(output).s: $(script)
 	$(sbcl) '(output-to-file "$(output).s" (load "$(script)"))'
 
 clean:

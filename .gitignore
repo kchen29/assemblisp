@@ -1,3 +1,8 @@
+*.~
+*.o
+*.s
+*.out
+
 *.FASL
 *.fasl
 *.lisp-temp
