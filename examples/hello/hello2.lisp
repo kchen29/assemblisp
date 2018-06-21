@@ -8,5 +8,5 @@
 (posix-exit $0)
 
 (label message)
-(.ascii  "Hello, world\\n")
+(.ascii  "Hello, world\n")
 
