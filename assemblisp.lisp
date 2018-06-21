@@ -29,8 +29,11 @@
              collect `(nullary ,name))))
 
 (binaries mov xor)
-(unaries .global .ascii)
+(unaries .global)
 (nullaries syscall .text)
+
+(defmacro .ascii (str)
+  `(format t ".ascii \"~A\"~%" ,str))
 
 (defmacro label (a)
   `(format t "~S:~%" ',a))
@@ -38,9 +41,10 @@
 ;;;funky stuff: redo the macro for " so that the reader and printer don't actually change the string
 ;;;reading and printing "\n" should come out as "\n"
 (defun escaped-string-reader (stream char)
-  (let ((chars (list char)))
+  (declare (ignore char))
+  (let (chars)
     (do ((cur (read-char stream) (read-char stream)))
-        ((char= cur #\") (push #\" chars))
+        ((char= cur #\"))
       (if (char= cur #\\)
           (let ((next (read-char stream)))
             (if (or (char= next #\\) (char= next #\"))
@@ -49,7 +53,7 @@
           (push cur chars)))
     (coerce (nreverse chars) 'string)))
 
-;; (set-macro-character #\" #'escaped-string-reader)
+(set-macro-character #\" #'escaped-string-reader)
 
 ;;keep lowercase names as lowercase
 (setf (readtable-case *readtable*) :invert)

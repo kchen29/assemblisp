@@ -16,5 +16,5 @@
 (syscall)                    ; invoke operating system to exit
 
 (label message)
-(.ascii  "Hello, world\\n")
+(.ascii  "Hello, world\n")
 
