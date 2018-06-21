@@ -38,6 +38,10 @@
 (defmacro label (a)
   `(format t "~S:~%" ',a))
 
+(defmacro address (&key displacement base index scale)
+  "Turn an address operand with the given data into a string to be printed."
+  (format nil "~@[~A~](~@[~A~]~@[,~A~]~@[,~A~])" displacement base index scale))
+
 ;;;funky stuff: redo the macro for " so that the reader and printer don't actually change the string
 ;;;reading and printing "\n" should come out as "\n"
 (defun escaped-string-reader (stream char)
