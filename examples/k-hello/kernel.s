@@ -1,7 +1,7 @@
 #kernel.s
 
 .code32
-.section .text
+.text
         #multiboot spec
         .align 4
         .long 0x1BADB002            #magic
